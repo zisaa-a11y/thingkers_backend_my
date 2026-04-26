@@ -4,6 +4,10 @@ from django.db import models
 
 
 class Enrollment(models.Model):
+    COURSE_CHOICES = (
+        ("Python", "Python"),
+    )
+
     GENDER_CHOICES = (
         ("male", "Male"),
         ("female", "Female"),
@@ -13,7 +17,7 @@ class Enrollment(models.Model):
     LEVEL_CHOICES = (
         ("beginner", "Beginner"),
         ("intermediate", "Intermediate"),
-        ("advanced", "Advanced"),
+        ("advance", "Advance"),
     )
 
     BATCH_CHOICES = (
@@ -28,7 +32,7 @@ class Enrollment(models.Model):
     )
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    course = models.CharField(max_length=120)
+    course = models.CharField(max_length=120, choices=COURSE_CHOICES)
     name = models.CharField(max_length=255)
     email = models.EmailField()
     phone = models.CharField(max_length=20)
@@ -47,3 +51,7 @@ class Enrollment(models.Model):
 
     def __str__(self) -> str:
         return f"{self.name} - {self.course}"
+
+    @classmethod
+    def as_options(cls, choices):
+        return [{"value": value, "label": label} for value, label in choices]
