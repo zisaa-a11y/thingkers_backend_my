@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "accounts",
     "enrollments",
+    "team",
 ]
 
 MIDDLEWARE = [
@@ -86,7 +87,16 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = "static/"
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+TEAM_ALLOWED_IMAGE_CONTENT_TYPES = {
+    "image/jpeg",
+    "image/png",
+    "image/webp",
+}
+TEAM_MAX_IMAGE_SIZE_BYTES = int(os.getenv("TEAM_MAX_IMAGE_SIZE_BYTES", str(2 * 1024 * 1024)))
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
