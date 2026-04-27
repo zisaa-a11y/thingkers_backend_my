@@ -14,10 +14,11 @@ urlpatterns = [
     path("api", health_check),
     path("api/", health_check),
     path("api/health", health_check),
+    path("api/health/", health_check),
     path("api/auth/", include("accounts.urls")),
     path("api/", include("enrollments.urls")),
     path("api/", include("team.urls")),
 ]
 
-if settings.DEBUG:
+if settings.DEBUG or settings.SERVE_MEDIA_FILES:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
