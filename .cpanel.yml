@@ -1,0 +1,4 @@
+---
+deployment:
+  tasks:
+    - APP_ROOT="$HOME/thingkersbackend.thechamberone.com" VENV_PATH="$HOME/virtualenv/thingkersbackend.thechamberone.com/3.11" && cd "$APP_ROOT" && source "$VENV_PATH/bin/activate" && pip install --upgrade pip && pip install -r requirements.txt && python manage.py migrate --noinput && python manage.py collectstatic --noinput && mkdir -p tmp && touch tmp/restart.txt
